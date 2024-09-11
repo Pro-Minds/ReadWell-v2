@@ -1,3 +1,4 @@
+# Dockerfile
 FROM node:20 as build
 LABEL authors="sinke"
 
@@ -16,14 +17,24 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Use a lightweight server to serve the app
-FROM nginx:alpine
+# Production Stage
+FROM node:20
 
-# Copy the build files to the Nginx server
-COPY --from=build /app/build /usr/share/nginx/html
+# Install serve
+RUN npm install -g serve
 
-# Expose the default port for Nginx
-EXPOSE 80
+# Set the working directory
+WORKDIR /app
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Copy built files from the previous stage
+COPY --from=build /app/build /app/build
+
+# Expose the port on which the app will run
+EXPOSE 3000
+
+# Set environment variables
+ENV REACT_APP_API_URL=http://localhost:8080/api
+ENV REACT_APP_USER_API_URL=http://localhost:8080/api/user
+
+# Serve the app
+CMD ["serve", "-s", "build", "-l", "3000"]

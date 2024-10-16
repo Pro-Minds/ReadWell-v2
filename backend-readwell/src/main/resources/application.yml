@@ -42,6 +42,9 @@ spring:
 cors:
   allowed-origins: "${ALLOWED_ORIGINS:http://localhost:3000,http://readwell-UI:3000}"
 
+cors:
+  allowed-origins: "${ALLOWED_ORIGINS:http://localhost:3000,http://readwell-UI:3000}"
+
 logging:
   level:
     org.springframework.security: DEBUG

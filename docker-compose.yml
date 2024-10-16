@@ -36,8 +36,8 @@ services:
   backend:
     container_name: readwell-server
     build:
-      context: ./backend-readwell
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.backend-readwell
     ports:
       - "8080:8080"
     networks:

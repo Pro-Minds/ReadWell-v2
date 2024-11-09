@@ -57,7 +57,7 @@ jobs:
             echo "TAG is empty. Exiting..."
             exit 1
           fi
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/backend:${{ env.TAG }} ./backend-readwell
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/readwell/backend:${{ env.TAG }} ./backend-readwell
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/backend:${{ env.TAG }}
 
       - name: Build and push frontend image
@@ -66,7 +66,7 @@ jobs:
             echo "TAG is empty. Exiting..."
             exit 1
           fi
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/frontend:${{ env.TAG }} ./frontend-readwell
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/readwell//frontend:${{ env.TAG }} ./frontend-readwell
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/frontend:${{ env.TAG }}
 
       - name: Tag and push commit
